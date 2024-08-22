@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
+import { GameService } from './game.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  constructor(private gameService: GameService) { }
   title = 'tic-tac-toe';
+  currentPlayer = signal('')
+  currentRound = signal('')
+  player1Data: any = 'Joueur 1'
+  player2Data: any = 'Joueur 2'
+  ngOnInit() {
+    this.currentPlayer = this.gameService.getCurrentPlayer()
+    this.currentRound = this.gameService.getCurrentRound()
+  }
 }

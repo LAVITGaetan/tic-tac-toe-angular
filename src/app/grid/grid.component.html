@@ -1,0 +1,8 @@
+<div class="game-grid">
+    <div *ngFor="let cell of gameCells" class="grid-item" (click)="markItem(cell.case)">
+        <img *ngIf="gameCells[cell.case].isChecked && gameCells[cell.case].player === 'player_0'" width="48px"
+            height="48px" src="assets/icon-circle.png">
+        <img *ngIf="gameCells[cell.case].isChecked && gameCells[cell.case].player === 'player_1'" width="48px"
+            height="48px" src="assets/icon-cross.png">
+    </div>
+</div>
