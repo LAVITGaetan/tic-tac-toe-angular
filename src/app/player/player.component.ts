@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
+import { GameService } from '../game.service';
 
 @Component({
   selector: 'app-player',
@@ -6,5 +7,12 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./player.component.css']
 })
 export class PlayerComponent {
-@Input() playerData: any
+  @Input() playerData: any
+  constructor(private gameService: GameService) { }
+  player_0Score = signal(0)
+  player_1Score = signal(0)
+  ngOnInit() {
+    this.player_0Score = this.gameService.getPlayer0Score()
+    this.player_1Score = this.gameService.getPlayer1Score()
+  }
 }

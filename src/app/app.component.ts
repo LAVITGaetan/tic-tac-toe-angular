@@ -10,7 +10,7 @@ export class AppComponent {
   constructor(private gameService: GameService) { }
   title = 'tic-tac-toe';
   currentPlayer = signal('')
-  currentRound = signal('')
+  currentRound = signal(1)
   player1Data: any = 'Joueur 1'
   player2Data: any = 'Joueur 2'
   ngOnInit() {

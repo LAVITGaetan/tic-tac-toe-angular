@@ -9,7 +9,7 @@ import { GameService } from '../game.service';
 export class GridComponent {
 
   currentWinner: string = ''
-  round: number = 0
+  turn: number = 0
 
   gameCells: any = [
     {
@@ -64,7 +64,63 @@ export class GridComponent {
 
   constructor(private gameService: GameService) { }
 
+  resetCells() {
+    this.turn = 0
+    this.player0Table = []
+    this.player1Table = []
+    this.gameCells = [
+      {
+        case: 0,
+        isChecked: false,
+        player: '',
+      },
+      {
+        case: 1,
+        isChecked: false,
+        player: '',
+      },
+      {
+        case: 2,
+        isChecked: false,
+        player: '',
+      },
+      {
+        case: 3,
+        isChecked: false,
+        player: '',
+      },
+      {
+        case: 4,
+        isChecked: false,
+        player: '',
+      },
+      {
+        case: 5,
+        isChecked: false,
+        player: '',
+      },
+      {
+        case: 6,
+        isChecked: false,
+        player: '',
+      },
+      {
+        case: 7,
+        isChecked: false,
+        player: '',
+      },
+      {
+        case: 8,
+        isChecked: false,
+        player: '',
+      },
+    ]
+    this.gameService.setCurrentPlayer('player_0')
+  }
+
   markItem(item: string) {
+    this.turn += 1
+
     let selectedCase = this.gameCells[item]
     if (!selectedCase.isChecked) {
       let currentPlayer = this.gameService.getCurrentPlayer()
@@ -95,20 +151,37 @@ export class GridComponent {
 
     for (let i = 0; i < winningCombinations.length; i++) {
       const combination = winningCombinations[i];
-      if (this.player1Table.includes(combination[0])
-        && this.player1Table.includes(combination[1])
-        && this.player1Table.includes(combination[2])) {
-        alert('winner 1')
-        this.currentWinner = currentPlayer
-        this.round += 1
-      }
       if (this.player0Table.includes(combination[0])
         && this.player0Table.includes(combination[1])
         && this.player0Table.includes(combination[2])) {
-        alert('winner 0')
+        alert('Joueur 1 gagne')
         this.currentWinner = currentPlayer
-        this.round += 1
+        this.gameService.updateRound()
+        this.gameService.updatePlayer0Score()
+        this.turn = 0
+        this.resetCells()
+        return
       }
+      if (this.player1Table.includes(combination[0])
+        && this.player1Table.includes(combination[1])
+        && this.player1Table.includes(combination[2])) {
+        alert('Joueur 2 gagne')
+
+        this.currentWinner = currentPlayer
+        this.gameService.updateRound()
+        this.gameService.updatePlayer1Score()
+        this.turn = 0
+        this.resetCells()
+        return
+      }
+
+    }
+
+    if (this.turn > 8) {
+      this.turn = 0
+      alert('Egalité')
+      this.gameService.updateRound()
+      this.resetCells()
     }
   }
 }
