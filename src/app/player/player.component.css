@@ -21,6 +21,9 @@
     background-color: var(--clr-darker);
     top: -24px;
     left: calc(50% - 24px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .player-name {

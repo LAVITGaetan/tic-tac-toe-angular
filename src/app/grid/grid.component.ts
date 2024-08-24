@@ -10,7 +10,6 @@ export class GridComponent {
 
   currentWinner: string = ''
   turn: number = 0
-
   gameCells: any = [
     {
       case: 0,
@@ -116,6 +115,7 @@ export class GridComponent {
       },
     ]
     this.gameService.setCurrentPlayer('player_0')
+    this.currentWinner = ''
   }
 
   markItem(item: string) {
@@ -154,24 +154,19 @@ export class GridComponent {
       if (this.player0Table.includes(combination[0])
         && this.player0Table.includes(combination[1])
         && this.player0Table.includes(combination[2])) {
-        alert('Joueur 1 gagne')
-        this.currentWinner = currentPlayer
+        this.currentWinner = 'player_0'
         this.gameService.updateRound()
         this.gameService.updatePlayer0Score()
         this.turn = 0
-        this.resetCells()
         return
       }
       if (this.player1Table.includes(combination[0])
         && this.player1Table.includes(combination[1])
         && this.player1Table.includes(combination[2])) {
-        alert('Joueur 2 gagne')
-
-        this.currentWinner = currentPlayer
+        this.currentWinner = 'player_1'
         this.gameService.updateRound()
         this.gameService.updatePlayer1Score()
         this.turn = 0
-        this.resetCells()
         return
       }
 
@@ -183,5 +178,9 @@ export class GridComponent {
       this.gameService.updateRound()
       this.resetCells()
     }
+  }
+
+  closeModal() {
+    this.resetCells()
   }
 }

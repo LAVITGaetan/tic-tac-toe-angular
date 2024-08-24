@@ -16,6 +16,7 @@
 body {
     background-color: var(--clr-background);
     color: #fffffe;
+    padding-top: 100px;
 }
 
 .page {
@@ -91,7 +92,4 @@ body {
         justify-content: center;
         align-items: center;
     }
-
-
-
 }
